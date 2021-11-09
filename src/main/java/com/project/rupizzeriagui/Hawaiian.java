@@ -20,4 +20,9 @@ public class Hawaiian extends Pizza {
         return (toppings.size() - MIN_TOPPINGS) * PRICE_PER_TOPPING +
                 sizeCost + BASE_PRICE_DELUXE;
     }
+
+    @Override
+    public String toString() {
+        return "Hawaiian" + super.toString();
+    }
 }

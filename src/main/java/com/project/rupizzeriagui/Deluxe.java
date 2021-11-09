@@ -7,7 +7,7 @@ public class Deluxe extends Pizza {
     public Deluxe() {
         toppings.add(Topping.Pepperoni);
         toppings.add(Topping.Sausage);
-        toppings.add(Topping.Ham);
+        toppings.add(Topping.Mushroom);
         toppings.add(Topping.Onion);
         toppings.add(Topping.GreenPepper);
         size = Size.small;
@@ -23,6 +23,11 @@ public class Deluxe extends Pizza {
         }
         return (toppings.size() - MIN_TOPPINGS) * PRICE_PER_TOPPING +
                 sizeCost + BASE_PRICE_DELUXE;
+    }
+
+    @Override
+    public String toString() {
+        return "Deluxe" + super.toString();
     }
 
 

@@ -22,4 +22,15 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch();
     }
+
+    //FOR TESTING ONLY
+//    public static void main(String[] args) {
+//        Pizza p = PizzaMaker.createPizza("Deluxe");
+//        System.out.println("before:" + p.price());
+//        System.out.println(p.toString());
+//        p.setSize(Size.medium);
+//        p.addTopping(Topping.BlackOlives);
+//        System.out.println("after:"+ p.price());
+//        System.out.println(p.toString());
+//    }
 }

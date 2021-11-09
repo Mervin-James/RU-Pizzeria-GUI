@@ -1,6 +1,6 @@
 package com.project.rupizzeriagui;
 
-public class Pepperoni extends Pizza{
+public class Pepperoni extends Pizza {
     private static final int MIN_TOPPINGS = 1;
     private static final double BASE_PRICE_DELUXE = 8.99;
 
@@ -19,5 +19,10 @@ public class Pepperoni extends Pizza{
         }
         return (toppings.size() - MIN_TOPPINGS) * PRICE_PER_TOPPING +
                 sizeCost + BASE_PRICE_DELUXE;
+    }
+
+    @Override
+    public String toString() {
+        return "Pepperoni" + super.toString();
     }
 }
