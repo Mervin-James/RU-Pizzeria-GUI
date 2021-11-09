@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField fx:id="phoneNumber" layoutX="299.0" layoutY="113.0" prefHeight="25.0" prefWidth="182.0" />
+      <Text layoutX="96.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Phone Number">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="97.0" layoutX="-3.0" layoutY="-2.0" stroke="BLACK" strokeType="INSIDE" width="606.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="1.0" green="0.7993826866149902" blue="0.39814814925193787" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.9473684430122375" green="0.6973684430122375" blue="0.6973684430122375" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Text fill="RED" layoutX="216.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RU Pizzeria">
+         <font>
+            <Font name="Bodoni MT Italic" size="33.0" />
+         </font>
+      </Text>
+      <Button fx:id="orderDeluxe" contentDisplay="TOP" layoutX="39.0" layoutY="173.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="167.0" style="-fx-background-color: #000000;" text="order Deluxe" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="143.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Deluxe%20Pizza.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="orderHawaiian" contentDisplay="TOP" layoutX="39.0" layoutY="379.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="148.0" style="-fx-background-color: #000000;" text="order Hawaiian" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="138.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Hawaiian%20Pizza.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="orderPepperoni" contentDisplay="TOP" layoutX="51.0" layoutY="561.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="175.0" style="-fx-background-color: #000000;" text="order Pepperoni" textFill="WHITE">
+         <graphic>
+            <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Pepperoni%20Pizza.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="currentOrder" contentDisplay="TOP" layoutX="363.0" layoutY="388.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Current Order">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Current%20Order.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button fx:id="storeOrders" contentDisplay="TOP" layoutX="363.0" layoutY="580.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Store Orders">
+         <graphic>
+            <ImageView fitHeight="110.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Store%20Orders.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
