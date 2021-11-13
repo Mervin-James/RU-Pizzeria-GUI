@@ -4,13 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -36,18 +33,24 @@ public class MainMenuController {
     @FXML
     private Button storeOrders;
 
+    private StoreOrders orders;
     private Pizza selectedPizza;
     private Image selectedPizzaImg;
-    private StoreOrders orders;
+    private Order selectedOrder;
+
+    @FXML
+    public void initialize() {
+        this.orders = new StoreOrders();
+    }
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-
         if (!phoneNumberValidation()) return;
+        loadSelectedOrder();
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
         selectedPizzaImg = new Image(getClass().getResourceAsStream(
-                        "Deluxe_Pizza.jpg"));
+                "Deluxe_Pizza.jpg"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "pizza-customization.fxml"));
@@ -92,12 +95,17 @@ public class MainMenuController {
         return this.selectedPizzaImg;
     }
 
+    public Order getSelectedOrder() {
+        return this.selectedOrder;
+    }
+
     private boolean phoneNumberValidation() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         if (phoneNumber.getText().length() != 10) {
-            alert.setTitle("Missing input data");
-            alert.setHeaderText("Telephone number missing");
-            alert.setContentText("Please input a 10-digit telephone number.");
+            alert.setTitle("Invalid input data");
+            alert.setHeaderText("Telephone number");
+            alert.setContentText("Please input the customer's 10-digit " +
+                    "telephone number.");
             alert.showAndWait();
             return false;
         }
@@ -107,5 +115,19 @@ public class MainMenuController {
                 "number: " + phoneNumber.getText());
         alert.showAndWait();
         return true;
+    }
+
+    private void loadSelectedOrder() {
+        ArrayList<Order> storeOrders = orders.getOrders();
+        for (int i = 0; i < storeOrders.size(); i++) {
+            if (storeOrders.get(i)
+                    .getPhoneNumber()
+                    .equals(phoneNumber.getText())) {
+                selectedOrder = storeOrders.get(i);
+                return;
+            }
+        }
+        selectedOrder = new Order(phoneNumber.getText());
+        orders.addOrder(selectedOrder);
     }
 }

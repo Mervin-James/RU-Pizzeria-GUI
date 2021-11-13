@@ -42,6 +42,6 @@
          </font>
       </Text>
       <TextField fx:id="pizzaPrice" editable="false" layoutX="162.0" layoutY="524.0" prefHeight="25.0" prefWidth="125.0" />
-      <Button fx:id="addToOrder" layoutX="307.0" layoutY="524.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Add to order" />
+      <Button fx:id="addToOrder" layoutX="307.0" layoutY="524.0" mnemonicParsing="false" onAction="#onAddToOrderClick" prefHeight="25.0" prefWidth="134.0" text="Add to order" />
    </children>
 </AnchorPane>
