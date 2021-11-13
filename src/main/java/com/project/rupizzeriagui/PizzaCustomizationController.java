@@ -36,23 +36,26 @@ public class PizzaCustomizationController {
     private Button removeTopping;
 
     @FXML
-    private ListView<String> selectedToppings;
+    private ListView<Topping> selectedToppings;
 
     @FXML
-    private ListView<String> additionalToppings;
+    private ListView<Topping> additionalToppings;
 
     @FXML
     public void initialize() {
-        ObservableList<String> items = FXCollections.observableArrayList(
-                "small", "medium", "large");
-        pizzaSize.setItems(items);
-        pizzaSize.setValue("small");
-
-        ObservableList<String> toppings =
-                FXCollections.observableArrayList("Sausage", "Chicken",
-                        "Beef", "Ham", "Pineapple", "BlackOlives", "Cheese"
-                        , "GreenPepper", "Onion", "Pepperoni", "Mushroom");
-        additionalToppings.setItems(toppings);
+//
+//        if (pizza instanceof Deluxe) {
+//            additionalToppings.getItems().remove(Topping.Pepperoni);
+//            additionalToppings.getItems().remove(Topping.Sausage);
+//            additionalToppings.getItems().remove(Topping.Mushroom);
+//            additionalToppings.getItems().remove(Topping.Onion);
+//            additionalToppings.getItems().remove(Topping.GreenPepper);
+//            selectedToppings.getItems().add(Topping.Pepperoni);
+//            selectedToppings.getItems().add(Topping.Sausage);
+//            selectedToppings.getItems().add(Topping.Mushroom);
+//            selectedToppings.getItems().add(Topping.Onion);
+//            selectedToppings.getItems().add(Topping.GreenPepper);
+//        }
     }
 
     private MainMenuController mainMenuController;
@@ -62,9 +65,27 @@ public class PizzaCustomizationController {
         mainMenuController = controller;
         pizza = mainMenuController.getSelectedPizza();
         pizzaImg = mainMenuController.getSelectedPizzaImg();
+        populateFields();
+    }
+
+    private void populateFields() {
         pizzaView.setImage(pizzaImg);
         imageButton.setText("Deluxe");
-        System.out.println("From PizzaViewController" + pizza.toString());
+//        System.out.println("From PizzaViewController" + pizza.toString());
+        ObservableList<String> items = FXCollections.observableArrayList(
+                "small", "medium", "large");
+        pizzaSize.setItems(items);
+        pizzaSize.setValue("small");
+        ObservableList<Topping> toppings =
+                FXCollections.observableArrayList(Topping.Sausage,
+                        Topping.Chicken, Topping.Beef, Topping.Ham,
+                        Topping.Pineapple, Topping.BlackOlives,
+                        Topping.Cheese, Topping.GreenPepper, Topping.Onion,
+                        Topping.Pepperoni, Topping.Mushroom);
+        additionalToppings.setItems(toppings);
+        ArrayList<Topping> defaultToppings = pizza.getToppings();
+        toppings.removeAll(defaultToppings);
+        selectedToppings.setItems(FXCollections.observableList(defaultToppings));
     }
 
 

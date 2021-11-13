@@ -42,7 +42,6 @@ public class MainMenuController {
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-
         if (!phoneNumberValidation()) return;
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
