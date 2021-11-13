@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -37,13 +38,15 @@ public class MainMenuController {
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Ordering Pizzas");
-        alert.setContentText("Starting a new order!");
-        alert.showAndWait();
+//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//        alert.setTitle("Confirmation");
+//        alert.setHeaderText("Ordering Pizzas");
+//        alert.setContentText("Starting a new order!");
+//        alert.showAndWait();
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
+        selectedPizzaImg = new Image(getClass().getResourceAsStream(
+                        "Deluxe_Pizza.jpg"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "pizza-customization.fxml"));
@@ -60,11 +63,11 @@ public class MainMenuController {
     }
 
     private Pizza selectedPizza;
-    private String selectedPizzaImg;
+    private Image selectedPizzaImg;
     public Pizza getSelectedPizza() {
         return this.selectedPizza;
     }
-    public String getSelectedPizzaImg() {
+    public Image getSelectedPizzaImg() {
         return this.selectedPizzaImg;
     }
 

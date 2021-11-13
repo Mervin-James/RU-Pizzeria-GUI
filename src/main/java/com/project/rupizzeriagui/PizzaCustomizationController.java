@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.util.ArrayList;
@@ -56,12 +57,14 @@ public class PizzaCustomizationController {
 
     private MainMenuController mainMenuController;
     private Pizza pizza;
-    private String pizzaImg;
+    private Image pizzaImg;
     public void setMainMenuController(MainMenuController controller) {
         mainMenuController = controller;
         pizza = mainMenuController.getSelectedPizza();
         pizzaImg = mainMenuController.getSelectedPizzaImg();
-        System.out.println("From PizzAviewController" + pizza.toString());
+        pizzaView.setImage(pizzaImg);
+        imageButton.setText("Deluxe");
+        System.out.println("From PizzaViewController" + pizza.toString());
     }
 
 }
