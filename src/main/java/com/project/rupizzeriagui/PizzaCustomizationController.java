@@ -9,6 +9,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 public class PizzaCustomizationController {
 
     @FXML
@@ -53,8 +55,13 @@ public class PizzaCustomizationController {
     }
 
     private MainMenuController mainMenuController;
+    private Pizza pizza;
+    private String pizzaImg;
     public void setMainMenuController(MainMenuController controller) {
         mainMenuController = controller;
+        pizza = mainMenuController.getSelectedPizza();
+        pizzaImg = mainMenuController.getSelectedPizzaImg();
+        System.out.println("From PizzAviewController" + pizza.toString());
     }
 
 }

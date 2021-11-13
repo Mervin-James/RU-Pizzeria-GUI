@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MainMenuController {
 
@@ -42,18 +43,29 @@ public class MainMenuController {
         alert.setContentText("Starting a new order!");
         alert.showAndWait();
 
+        selectedPizza = PizzaMaker.createPizza("Deluxe");
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "pizza-customization.fxml"));
-        AnchorPane root = (AnchorPane) loader.load();
-        Scene scene = new Scene(root, 600, 800);
+
         Stage stage = new Stage();
         stage.setTitle("Customize your Pizza");
-        stage.setScene(scene);
+        stage.setScene(new Scene(loader.load()));
+
+        PizzaCustomizationController pizzaCustomizationController = loader.getController();
+        pizzaCustomizationController.setMainMenuController(this);
+
         stage.show();
 
-//        PizzaCustomizationController pizzaCustomizationController = loader.getController();
-//        pizzaCustomizationController.setMainMenuController(this);
+    }
 
+    private Pizza selectedPizza;
+    private String selectedPizzaImg;
+    public Pizza getSelectedPizza() {
+        return this.selectedPizza;
+    }
+    public String getSelectedPizzaImg() {
+        return this.selectedPizzaImg;
     }
 
     @FXML
