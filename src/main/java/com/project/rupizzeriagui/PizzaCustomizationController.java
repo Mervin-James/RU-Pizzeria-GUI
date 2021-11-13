@@ -2,6 +2,7 @@ package com.project.rupizzeriagui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -41,26 +42,10 @@ public class PizzaCustomizationController {
     @FXML
     private ListView<Topping> additionalToppings;
 
-    @FXML
-    public void initialize() {
-//
-//        if (pizza instanceof Deluxe) {
-//            additionalToppings.getItems().remove(Topping.Pepperoni);
-//            additionalToppings.getItems().remove(Topping.Sausage);
-//            additionalToppings.getItems().remove(Topping.Mushroom);
-//            additionalToppings.getItems().remove(Topping.Onion);
-//            additionalToppings.getItems().remove(Topping.GreenPepper);
-//            selectedToppings.getItems().add(Topping.Pepperoni);
-//            selectedToppings.getItems().add(Topping.Sausage);
-//            selectedToppings.getItems().add(Topping.Mushroom);
-//            selectedToppings.getItems().add(Topping.Onion);
-//            selectedToppings.getItems().add(Topping.GreenPepper);
-//        }
-    }
-
     private MainMenuController mainMenuController;
     private Pizza pizza;
     private Image pizzaImg;
+    private Order currentOrder;
     public void setMainMenuController(MainMenuController controller) {
         mainMenuController = controller;
         pizza = mainMenuController.getSelectedPizza();
@@ -69,6 +54,7 @@ public class PizzaCustomizationController {
     }
 
     private void populateFields() {
+        currentOrder = mainMenuController.getSelectedOrder();
         pizzaView.setImage(pizzaImg);
         imageButton.setText("Deluxe");
 //        System.out.println("From PizzaViewController" + pizza.toString());
@@ -88,6 +74,9 @@ public class PizzaCustomizationController {
         selectedToppings.setItems(FXCollections.observableList(defaultToppings));
     }
 
-
+    @FXML
+    void onAddToOrderClick(ActionEvent event) {
+        currentOrder.addPizza(pizza);
+    }
 
 }
