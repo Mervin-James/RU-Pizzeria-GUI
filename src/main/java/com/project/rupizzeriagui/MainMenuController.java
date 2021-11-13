@@ -35,13 +35,13 @@ public class MainMenuController {
     @FXML
     private Button storeOrders;
 
+    private Pizza selectedPizza;
+    private String selectedPizzaImg;
+    private StoreOrders orders;
+
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Confirmation");
-        alert.setHeaderText("Ordering Pizzas");
-        alert.setContentText("Starting a new order!");
-        alert.showAndWait();
+        if (!phoneNumberValidation()) return;
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
 
@@ -52,21 +52,14 @@ public class MainMenuController {
         stage.setTitle("Customize your Pizza");
         stage.setScene(new Scene(loader.load()));
 
-        PizzaCustomizationController pizzaCustomizationController = loader.getController();
+        PizzaCustomizationController pizzaCustomizationController =
+                loader.getController();
         pizzaCustomizationController.setMainMenuController(this);
 
         stage.show();
 
     }
 
-    private Pizza selectedPizza;
-    private String selectedPizzaImg;
-    public Pizza getSelectedPizza() {
-        return this.selectedPizza;
-    }
-    public String getSelectedPizzaImg() {
-        return this.selectedPizzaImg;
-    }
 
     @FXML
     void onOrderHawaiianButtonClick(ActionEvent event) {
@@ -86,5 +79,31 @@ public class MainMenuController {
     @FXML
     void onStoreOrdersButtonClick(ActionEvent event) {
 
+    }
+
+
+    public Pizza getSelectedPizza() {
+        return this.selectedPizza;
+    }
+
+    public String getSelectedPizzaImg() {
+        return this.selectedPizzaImg;
+    }
+
+    private boolean phoneNumberValidation() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        if (phoneNumber.getText().length() != 10) {
+            alert.setTitle("Missing input data");
+            alert.setHeaderText("Telephone number missing");
+            alert.setContentText("Please input a 10-digit telephone number.");
+            alert.showAndWait();
+            return false;
+        }
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Ordering Pizzas");
+        alert.setContentText("Creating new pizza for customer with phone " +
+                "number: " + phoneNumber.getText());
+        alert.showAndWait();
+        return true;
     }
 }
