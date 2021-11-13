@@ -2,6 +2,7 @@ package com.project.rupizzeriagui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
@@ -9,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -42,9 +44,15 @@ public class MainMenuController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "pizza-customization.fxml"));
-//        AnchorPane root = (AnchorPane) loader.load();
-        PizzaCustomizationController pizzaCustomizationController = loader.getController();
-        pizzaCustomizationController.setMainMenuController(this);
+        AnchorPane root = (AnchorPane) loader.load();
+        Scene scene = new Scene(root, 600, 800);
+        Stage stage = new Stage();
+        stage.setTitle("Customize your Pizza");
+        stage.setScene(scene);
+        stage.show();
+
+//        PizzaCustomizationController pizzaCustomizationController = loader.getController();
+//        pizzaCustomizationController.setMainMenuController(this);
 
     }
 
