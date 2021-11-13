@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.rupizzeriagui.MainMenuController">
    <children>
       <TextField fx:id="phoneNumber" layoutX="299.0" layoutY="113.0" prefHeight="25.0" prefWidth="182.0" />
       <Text layoutX="96.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Phone Number">
@@ -44,38 +43,38 @@
             <Font name="Bodoni MT Italic" size="33.0" />
          </font>
       </Text>
-      <Button fx:id="orderDeluxe" contentDisplay="TOP" layoutX="39.0" layoutY="173.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="167.0" style="-fx-background-color: #000000;" text="order Deluxe" textFill="WHITE">
+      <Button fx:id="orderDeluxe" contentDisplay="TOP" layoutX="39.0" layoutY="173.0" mnemonicParsing="false" onAction="#onOrderDeluxeButtonClick" prefHeight="117.0" prefWidth="167.0" style="-fx-background-color: #000000;" text="order Deluxe" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="143.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Deluxe%20Pizza.jpg" />
+                  <Image url="@Deluxe_Pizza.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="orderHawaiian" contentDisplay="TOP" layoutX="39.0" layoutY="379.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="148.0" style="-fx-background-color: #000000;" text="order Hawaiian" textFill="WHITE">
+      <Button fx:id="orderHawaiian" contentDisplay="TOP" layoutX="39.0" layoutY="379.0" mnemonicParsing="false" onAction="#onOrderHawaiianButtonClick" prefHeight="117.0" prefWidth="148.0" style="-fx-background-color: #000000;" text="order Hawaiian" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="138.0" fitWidth="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Hawaiian%20Pizza.jpg" />
+                  <Image url="@Hawaiian_Pizza.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="orderPepperoni" contentDisplay="TOP" layoutX="51.0" layoutY="561.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="175.0" style="-fx-background-color: #000000;" text="order Pepperoni" textFill="WHITE">
+      <Button fx:id="orderPepperoni" contentDisplay="TOP" layoutX="51.0" layoutY="561.0" mnemonicParsing="false" onAction="#onOrderPepperoniButtonClick" prefHeight="117.0" prefWidth="175.0" style="-fx-background-color: #000000;" text="order Pepperoni" textFill="WHITE">
          <graphic>
             <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Pepperoni%20Pizza.jpg" />
+                  <Image url="@Pepperoni_Pizza.jpg" />
                </image>
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="currentOrder" contentDisplay="TOP" layoutX="363.0" layoutY="388.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Current Order">
+      <Button fx:id="currentOrder" contentDisplay="TOP" layoutX="363.0" layoutY="388.0" mnemonicParsing="false" onAction="#onCurrentOrderButtonClick" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Current Order">
          <graphic>
             <ImageView fitHeight="110.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Current%20Order.png" />
+                  <Image url="@Current_Order.png" />
                </image>
             </ImageView>
          </graphic>
@@ -83,11 +82,11 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="storeOrders" contentDisplay="TOP" layoutX="363.0" layoutY="580.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Store Orders">
+      <Button fx:id="storeOrders" contentDisplay="TOP" layoutX="363.0" layoutY="580.0" mnemonicParsing="false" onAction="#onStoreOrdersButtonClick" prefHeight="139.0" prefWidth="150.0" style="-fx-background-color: #ADD8E6;" text="Store Orders">
          <graphic>
             <ImageView fitHeight="110.0" fitWidth="142.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Store%20Orders.png" />
+                  <Image url="@Store_Orders.png" />
                </image>
             </ImageView>
          </graphic>
