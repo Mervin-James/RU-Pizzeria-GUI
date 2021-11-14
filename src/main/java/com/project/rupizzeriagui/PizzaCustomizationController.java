@@ -50,7 +50,8 @@ public class PizzaCustomizationController {
         pizza = controller.getSelectedPizza();
         pizzaImg = controller.getSelectedPizzaImg();
         currentOrder = controller.getSelectedOrder();
-        defaultToppings = pizza.getToppings();
+        defaultToppings = new ArrayList<>();
+        defaultToppings.addAll(pizza.getToppings());
         populateFields();
     }
 

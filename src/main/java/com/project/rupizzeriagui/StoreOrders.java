@@ -25,14 +25,14 @@ public class StoreOrders {
         return orders.remove(order);
     }
 
-    public void export() throws FileNotFoundException {
+    public void export(File targetFile) throws FileNotFoundException {
         DecimalFormat df = new DecimalFormat("###,##0.00");
-        File file = new File("Store_Orders.txt");
-        if (file.exists()) {
-            //handle if file already exists (in case user might not want to
-            // overwrite existing Store_Orders file)
-        }
-        PrintWriter pw = new PrintWriter(file);
+//        File file = new File("Store_Orders.txt");
+//        if (file.exists()) {
+//            //handle if file already exists (in case user might not want to
+//            // overwrite existing Store_Orders file)
+//        }
+        PrintWriter pw = new PrintWriter(targetFile);
         for (int i = 0; i < orders.size(); i++) {
             Order order = orders.get(i);
             pw.println("Customer phone number: " + order.getPhoneNumber());

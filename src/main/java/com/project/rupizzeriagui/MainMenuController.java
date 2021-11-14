@@ -129,8 +129,6 @@ public class MainMenuController {
             return;
         }
         loadSelectedOrder();
-        selectedOrder.addPizza(PizzaMaker.createPizza("Deluxe"));
-        selectedOrder.addPizza(PizzaMaker.createPizza("Hawaiian"));
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "current-order.fxml"));
         Stage stage = new Stage();
@@ -143,8 +141,34 @@ public class MainMenuController {
     }
 
     @FXML
-    void onStoreOrdersButtonClick(ActionEvent event) {
+    void onStoreOrdersButtonClick(ActionEvent event) throws IOException {
+        //TODO: DELETE CODE AFTER USED FOR TESTING
+//        selectedOrder.addPizza(PizzaMaker.createPizza("Deluxe"));
+//        selectedOrder.addPizza(PizzaMaker.createPizza("Hawaiian"));
+        Order order1 = new Order("1234567890");
+        Pizza p1 = PizzaMaker.createPizza("Deluxe");
+        p1.setSize(Size.medium);
+        p1.addTopping(Topping.BlackOlives);
+        order1.addPizza(p1);
+        Pizza p2 = PizzaMaker.createPizza("Pepperoni");
+        order1.addPizza(p2);
+        orders.addOrder(order1);
+        Order order2 = new Order("09876543212");
+        Pizza p3 = PizzaMaker.createPizza("Hawaiian");
+        p3.setSize(Size.large);
+        p3.addTopping(Topping.Chicken);
+        order2.addPizza(p3);
+        orders.addOrder(order2);
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "store-orders.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Store Order Overview");
+        stage.setScene(new Scene(loader.load()));
+        StoreOrdersController storeOrdersController =
+                loader.getController();
+        storeOrdersController.setMainMenuController(this);
+        stage.show();
     }
 
     public Pizza getSelectedPizza() {

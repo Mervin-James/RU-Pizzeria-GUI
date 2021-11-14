@@ -8,8 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.rupizzeriagui.StoreOrdersController">
    <children>
       <Text layoutX="205.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Store Orders" textAlignment="CENTER" wrappingWidth="251.13671875">
          <font>
@@ -17,11 +16,11 @@
          </font>
       </Text>
       <Text layoutX="22.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Customer Phone Number" wrappingWidth="162.13671875" />
-      <ComboBox fx:id="customerPhoneNumber" layoutX="176.0" layoutY="113.0" prefHeight="25.0" prefWidth="182.0" />
+      <ComboBox fx:id="customerPhoneNumber" layoutX="176.0" layoutY="113.0" onAction="#selectedCustomerPhoneNumber" prefHeight="25.0" prefWidth="182.0" />
       <Text layoutX="388.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order Total $" textAlignment="RIGHT" wrappingWidth="81.416015625" />
-      <TextField fx:id="orderTotal" layoutX="491.0" layoutY="113.0" />
-      <ListView fx:id="currentOrders" layoutX="22.0" layoutY="167.0" prefHeight="191.0" prefWidth="618.0" />
-      <Button fx:id="cancelStoreOrder" layoutX="83.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="202.0" text="Cancel Order" />
-      <Button fx:id="exportStoreOrder" layoutX="368.0" layoutY="384.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="202.0" text="Export Store Order" />
+      <TextField fx:id="orderTotal" editable="false" layoutX="491.0" layoutY="113.0" />
+      <ListView fx:id="pizzasInSelectedOrder" layoutX="22.0" layoutY="167.0" prefHeight="191.0" prefWidth="618.0" />
+      <Button fx:id="cancelStoreOrder" layoutX="83.0" layoutY="384.0" mnemonicParsing="false" onAction="#onCancelOrderClick" prefHeight="25.0" prefWidth="202.0" text="Cancel Order" />
+      <Button fx:id="exportStoreOrder" layoutX="368.0" layoutY="384.0" mnemonicParsing="false" onAction="#onExportStoreOrderClick" prefHeight="25.0" prefWidth="202.0" text="Export Store Order" />
    </children>
 </AnchorPane>
