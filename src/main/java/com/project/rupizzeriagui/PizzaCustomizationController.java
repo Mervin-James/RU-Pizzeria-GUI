@@ -14,6 +14,10 @@ import javafx.scene.image.ImageView;
 import java.util.ArrayList;
 
 public class PizzaCustomizationController {
+    private Pizza pizza;
+    private Image pizzaImg;
+    private Order currentOrder;
+    private ArrayList<Topping> defaultToppings;
 
     @FXML
     private Button addToOrder;
@@ -42,21 +46,15 @@ public class PizzaCustomizationController {
     @FXML
     private ListView<Topping> additionalToppings;
 
-    private MainMenuController mainMenuController;
-    private ArrayList<Topping> defaultToppings;
-    private Pizza pizza;
-    private Image pizzaImg;
-    private Order currentOrder;
     public void setMainMenuController(MainMenuController controller) {
-        mainMenuController = controller;
-        pizza = mainMenuController.getSelectedPizza();
-        pizzaImg = mainMenuController.getSelectedPizzaImg();
+        pizza = controller.getSelectedPizza();
+        pizzaImg = controller.getSelectedPizzaImg();
+        currentOrder = controller.getSelectedOrder();
         defaultToppings = pizza.getToppings();
         populateFields();
     }
 
     private void populateFields() {
-        currentOrder = mainMenuController.getSelectedOrder();
         pizzaView.setImage(pizzaImg);
         imageButton.setText("Deluxe");
 //        System.out.println("From PizzaViewController" + pizza.toString());

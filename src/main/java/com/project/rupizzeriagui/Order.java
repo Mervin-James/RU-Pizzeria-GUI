@@ -3,7 +3,7 @@ package com.project.rupizzeriagui;
 import java.util.ArrayList;
 
 public class Order {
-    private static final double TAX_RATE = 6.625;
+    private static final double TAX_RATE = 0.06625;
     private final String phoneNumber;
     private final ArrayList<Pizza> pizzas = new ArrayList<Pizza>();
 

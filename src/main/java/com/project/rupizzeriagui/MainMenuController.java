@@ -45,7 +45,11 @@ public class MainMenuController {
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-        if (!phoneNumberValidation()) return;
+        if (phoneNumber.getText().length() != 10) {
+            invalidPhoneNumberAlert();
+            return;
+        }
+        confirmCreateNewPizza();
         loadSelectedOrder();
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
@@ -68,7 +72,10 @@ public class MainMenuController {
 
     @FXML
     void onOrderHawaiianButtonClick(ActionEvent event) throws IOException {
-        if (!phoneNumberValidation()) return;
+        if (phoneNumber.getText().length() != 10) {
+            invalidPhoneNumberAlert();
+            return;
+        }
         loadSelectedOrder();
 
         selectedPizza = PizzaMaker.createPizza("Hawaiian");
@@ -91,7 +98,10 @@ public class MainMenuController {
 
     @FXML
     void onOrderPepperoniButtonClick(ActionEvent event) throws IOException {
-        if (!phoneNumberValidation()) return;
+        if (phoneNumber.getText().length() != 10) {
+            invalidPhoneNumberAlert();
+            return;
+        }
         loadSelectedOrder();
 
         selectedPizza = PizzaMaker.createPizza("Pepperoni");
@@ -113,8 +123,23 @@ public class MainMenuController {
     }
 
     @FXML
-    void onCurrentOrderButtonClick(ActionEvent event) {
-
+    void onCurrentOrderButtonClick(ActionEvent event) throws IOException {
+        if (phoneNumber.getText().length() != 10) {
+            invalidPhoneNumberAlert();
+            return;
+        }
+        loadSelectedOrder();
+        selectedOrder.addPizza(PizzaMaker.createPizza("Deluxe"));
+        selectedOrder.addPizza(PizzaMaker.createPizza("Hawaiian"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "current-order.fxml"));
+        Stage stage = new Stage();
+        stage.setTitle("Pizza Order Overview");
+        stage.setScene(new Scene(loader.load()));
+        CurrentOrderController currentOrderController =
+                loader.getController();
+        currentOrderController.setMainMenuController(this);
+        stage.show();
     }
 
     @FXML
@@ -134,22 +159,26 @@ public class MainMenuController {
         return this.selectedOrder;
     }
 
-    private boolean phoneNumberValidation() {
+    public StoreOrders getOrders() {
+        return this.orders;
+    }
+
+    private void invalidPhoneNumberAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        if (phoneNumber.getText().length() != 10) {
-            alert.setTitle("Invalid input data");
-            alert.setHeaderText("Telephone number");
-            alert.setContentText("Please input the customer's 10-digit " +
-                    "telephone number.");
-            alert.showAndWait();
-            return false;
-        }
+        alert.setTitle("Invalid input data");
+        alert.setHeaderText("Telephone number");
+        alert.setContentText("Please input the customer's 10-digit " +
+                "telephone number.");
+        alert.showAndWait();
+    }
+
+    private void confirmCreateNewPizza() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Ordering Pizzas");
         alert.setContentText("Creating new pizza for customer with phone " +
                 "number: " + phoneNumber.getText());
         alert.showAndWait();
-        return true;
     }
 
     private void loadSelectedOrder() {
@@ -163,6 +192,5 @@ public class MainMenuController {
             }
         }
         selectedOrder = new Order(phoneNumber.getText());
-        orders.addOrder(selectedOrder);
     }
 }
