@@ -51,8 +51,11 @@ public class MainMenuController {
             invalidPhoneNumberAlert();
             return;
         }
-        confirmCreateNewPizza();
-        loadSelectedOrder();
+        if (selectedOrder == null || !selectedOrder.getPhoneNumber()
+                .equals(phoneNumber.getText())) {
+            selectedOrder = new Order(phoneNumber.getText());
+            confirmCreateNewPizza();
+        }
 
         selectedPizza = PizzaMaker.createPizza("Deluxe");
         selectedPizzaImg = new Image(getClass().getResourceAsStream(
@@ -79,7 +82,11 @@ public class MainMenuController {
             invalidPhoneNumberAlert();
             return;
         }
-        loadSelectedOrder();
+        if (selectedOrder == null || !selectedOrder.getPhoneNumber()
+                .equals(phoneNumber.getText())) {
+            selectedOrder = new Order(phoneNumber.getText());
+            confirmCreateNewPizza();
+        }
 
         selectedPizza = PizzaMaker.createPizza("Hawaiian");
         selectedPizzaImg = new Image(getClass().getResourceAsStream(
@@ -106,7 +113,11 @@ public class MainMenuController {
             invalidPhoneNumberAlert();
             return;
         }
-        loadSelectedOrder();
+        if (selectedOrder == null || !selectedOrder.getPhoneNumber()
+                .equals(phoneNumber.getText())) {
+            selectedOrder = new Order(phoneNumber.getText());
+            confirmCreateNewPizza();
+        }
 
         selectedPizza = PizzaMaker.createPizza("Pepperoni");
         selectedPizzaImg = new Image(getClass().getResourceAsStream(
@@ -128,12 +139,15 @@ public class MainMenuController {
 
     @FXML
     void onCurrentOrderButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
-                .matches("[0-9]+"))) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
+                !(phoneNumber.getText().matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
-        loadSelectedOrder();
+        if (selectedOrder == null || !selectedOrder.getPhoneNumber()
+                .equals(phoneNumber.getText())) {
+            selectedOrder = new Order(phoneNumber.getText());
+        }
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "current-order.fxml"));
         Stage stage = new Stage();
@@ -150,20 +164,24 @@ public class MainMenuController {
         //TODO: DELETE CODE AFTER USED FOR TESTING
 //        selectedOrder.addPizza(PizzaMaker.createPizza("Deluxe"));
 //        selectedOrder.addPizza(PizzaMaker.createPizza("Hawaiian"));
-        Order order1 = new Order("1234567890");
-        Pizza p1 = PizzaMaker.createPizza("Deluxe");
-        p1.setSize(Size.medium);
-        p1.addTopping(Topping.BlackOlives);
-        order1.addPizza(p1);
-        Pizza p2 = PizzaMaker.createPizza("Pepperoni");
-        order1.addPizza(p2);
-        orders.addOrder(order1);
-        Order order2 = new Order("09876543212");
-        Pizza p3 = PizzaMaker.createPizza("Hawaiian");
-        p3.setSize(Size.large);
-        p3.addTopping(Topping.Chicken);
-        order2.addPizza(p3);
-        orders.addOrder(order2);
+//        Order order1 = new Order("1234567890");
+//        Pizza p1 = PizzaMaker.createPizza("Deluxe");
+//        p1.setSize(Size.medium);
+//        p1.addTopping(Topping.BlackOlives);
+//        order1.addPizza(p1);
+//        Pizza p2 = PizzaMaker.createPizza("Pepperoni");
+//        order1.addPizza(p2);
+//        orders.addOrder(order1);
+//        Order order2 = new Order("09876543212");
+//        Pizza p3 = PizzaMaker.createPizza("Hawaiian");
+//        p3.setSize(Size.large);
+//        p3.addTopping(Topping.Chicken);
+//        order2.addPizza(p3);
+//        orders.addOrder(order2);
+//        Order order3 = new Order("1231231231");
+//        Pizza p4 = PizzaMaker.createPizza("Pepperoni");
+//        order3.addPizza(p4);
+//        orders.addOrder(order3);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
                 "store-orders.fxml"));
@@ -208,18 +226,5 @@ public class MainMenuController {
         alert.setContentText("Creating new pizza for customer with phone " +
                 "number: " + phoneNumber.getText());
         alert.showAndWait();
-    }
-
-    private void loadSelectedOrder() {
-        ArrayList<Order> storeOrders = orders.getOrders();
-        for (int i = 0; i < storeOrders.size(); i++) {
-            if (storeOrders.get(i)
-                    .getPhoneNumber()
-                    .equals(phoneNumber.getText())) {
-                selectedOrder = storeOrders.get(i);
-                return;
-            }
-        }
-        selectedOrder = new Order(phoneNumber.getText());
     }
 }

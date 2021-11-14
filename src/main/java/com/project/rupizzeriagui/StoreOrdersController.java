@@ -60,7 +60,6 @@ public class StoreOrdersController {
 
     private void updateListView() {
         DecimalFormat df = new DecimalFormat("###,##0.00");
-
         boolean isOrdersEmpty = orders.getOrders().isEmpty();
         cancelStoreOrder.setDisable(isOrdersEmpty);
         exportStoreOrder.setDisable(isOrdersEmpty);
@@ -79,8 +78,8 @@ public class StoreOrdersController {
 
     @FXML
     void onCancelOrderClick(ActionEvent event) {
-        orders.removeOrder(selectedOrder);
         customerPhoneNumber.getItems().remove(selectedOrder.getPhoneNumber());
+        orders.removeOrder(selectedOrder);
         if (orders.getOrders().isEmpty()) {
             selectedOrder = null;
             customerPhoneNumber.setValue("");
@@ -88,7 +87,6 @@ public class StoreOrdersController {
             selectedOrder = orders.getOrders().get(0);
         }
         updateListView();
-
     }
 
     @FXML
