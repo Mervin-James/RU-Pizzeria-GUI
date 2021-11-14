@@ -64,17 +64,52 @@ public class MainMenuController {
         pizzaCustomizationController.setMainMenuController(this);
 
         stage.show();
-
     }
 
     @FXML
-    void onOrderHawaiianButtonClick(ActionEvent event) {
+    void onOrderHawaiianButtonClick(ActionEvent event) throws IOException {
+        if (!phoneNumberValidation()) return;
+        loadSelectedOrder();
 
+        selectedPizza = PizzaMaker.createPizza("Hawaiian");
+        selectedPizzaImg = new Image(getClass().getResourceAsStream(
+                "Hawaiian_Pizza.jpg"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "pizza-customization.fxml"));
+
+        Stage stage = new Stage();
+        stage.setTitle("Customize your Pizza");
+        stage.setScene(new Scene(loader.load()));
+
+        PizzaCustomizationController pizzaCustomizationController =
+                loader.getController();
+        pizzaCustomizationController.setMainMenuController(this);
+
+        stage.show();
     }
 
     @FXML
-    void onOrderPepperoniButtonClick(ActionEvent event) {
+    void onOrderPepperoniButtonClick(ActionEvent event) throws IOException {
+        if (!phoneNumberValidation()) return;
+        loadSelectedOrder();
 
+        selectedPizza = PizzaMaker.createPizza("Pepperoni");
+        selectedPizzaImg = new Image(getClass().getResourceAsStream(
+                "Pepperoni_Pizza.jpg"));
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "pizza-customization.fxml"));
+
+        Stage stage = new Stage();
+        stage.setTitle("Customize your Pizza");
+        stage.setScene(new Scene(loader.load()));
+
+        PizzaCustomizationController pizzaCustomizationController =
+                loader.getController();
+        pizzaCustomizationController.setMainMenuController(this);
+
+        stage.show();
     }
 
     @FXML

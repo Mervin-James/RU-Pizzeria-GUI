@@ -43,6 +43,7 @@ public class PizzaCustomizationController {
     private ListView<Topping> additionalToppings;
 
     private MainMenuController mainMenuController;
+    private ArrayList<Topping> defaultToppings;
     private Pizza pizza;
     private Image pizzaImg;
     private Order currentOrder;
@@ -50,6 +51,7 @@ public class PizzaCustomizationController {
         mainMenuController = controller;
         pizza = mainMenuController.getSelectedPizza();
         pizzaImg = mainMenuController.getSelectedPizzaImg();
+        defaultToppings = pizza.getToppings();
         populateFields();
     }
 
@@ -58,9 +60,9 @@ public class PizzaCustomizationController {
         pizzaView.setImage(pizzaImg);
         imageButton.setText("Deluxe");
 //        System.out.println("From PizzaViewController" + pizza.toString());
-        ObservableList<String> items = FXCollections.observableArrayList(
+        ObservableList<String> sizes = FXCollections.observableArrayList(
                 "small", "medium", "large");
-        pizzaSize.setItems(items);
+        pizzaSize.setItems(sizes);
         pizzaSize.setValue("small");
         ObservableList<Topping> toppings =
                 FXCollections.observableArrayList(Topping.Sausage,
@@ -69,14 +71,39 @@ public class PizzaCustomizationController {
                         Topping.Cheese, Topping.GreenPepper, Topping.Onion,
                         Topping.Pepperoni, Topping.Mushroom);
         additionalToppings.setItems(toppings);
-        ArrayList<Topping> defaultToppings = pizza.getToppings();
+//        ArrayList<Topping> defaultToppings = pizza.getToppings();
         toppings.removeAll(defaultToppings);
-        selectedToppings.setItems(FXCollections.observableList(defaultToppings));
+//        selectedToppings.setItems(FXCollections.observableList(defaultToppings));
+        for (Topping defaultTopping : defaultToppings) {
+            selectedToppings.getItems().add(defaultTopping);
+        }
     }
 
     @FXML
     void onAddToOrderClick(ActionEvent event) {
         currentOrder.addPizza(pizza);
+    }
+
+    @FXML
+    void onAddButtonClick(ActionEvent event) {
+        Topping toppingToAdd =
+                additionalToppings.getSelectionModel().getSelectedItem();
+        if (toppingToAdd != null && pizza.addTopping(toppingToAdd)) {
+            additionalToppings.getItems().remove(toppingToAdd);
+            selectedToppings.getItems().add(toppingToAdd);
+        }
+    }
+
+    @FXML
+    void onRemoveButtonClick(ActionEvent event) {
+        Topping toppingToRemove =
+                selectedToppings.getSelectionModel().getSelectedItem();
+        System.out.println(defaultToppings.toString());
+        if (toppingToRemove != null && !defaultToppings.contains(toppingToRemove)) {
+            selectedToppings.getItems().remove(toppingToRemove);
+            additionalToppings.getItems().add(toppingToRemove);
+            pizza.removeTopping(toppingToRemove);
+        }
     }
 
 }
