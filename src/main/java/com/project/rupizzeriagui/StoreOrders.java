@@ -27,14 +27,8 @@ public class StoreOrders {
 
     public void export(File targetFile) throws FileNotFoundException {
         DecimalFormat df = new DecimalFormat("###,##0.00");
-//        File file = new File("Store_Orders.txt");
-//        if (file.exists()) {
-//            //handle if file already exists (in case user might not want to
-//            // overwrite existing Store_Orders file)
-//        }
         PrintWriter pw = new PrintWriter(targetFile);
-        for (int i = 0; i < orders.size(); i++) {
-            Order order = orders.get(i);
+        for (Order order : orders) {
             pw.println("Customer phone number: " + order.getPhoneNumber());
             pw.println("\torders:");
             for (int j = 0; j < order.getPizzas().size(); j++) {

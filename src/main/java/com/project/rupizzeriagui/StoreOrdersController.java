@@ -111,21 +111,17 @@ public class StoreOrdersController {
     }
 
     @FXML
-    void onExportStoreOrderClick(ActionEvent event) {
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setTitle("Open Target Directory for the Export");
-//        chooser.getExtensionFilters()
-//                .addAll(new ExtensionFilter("Text Files", "*.txt"),
-//                        new ExtensionFilter("All Files", "*.*"));
+    void onExportStoreOrderClick(ActionEvent event)
+            throws FileNotFoundException {
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Open Target File for the Export");
+        chooser.getExtensionFilters()
+                .addAll(new ExtensionFilter("Text Files", "*.txt"),
+                        new ExtensionFilter("All Files", "*.*"));
         Stage stage = new Stage();
-//        File defaultDirectory = new File("Store_Orders.txt");
-//        chooser.setInitialDirectory(defaultDirectory);
-        File selectedDirectory = chooser.showDialog(stage);
-//        File targetFile = chooser.showSaveDialog(stage);
-        try {
-            orders.export(selectedDirectory);
-        } catch (FileNotFoundException e) {}
+        File targetFile = chooser.showSaveDialog(stage);
+        if (targetFile != null) {
+            orders.export(targetFile);
+        }
     }
-
-
 }
