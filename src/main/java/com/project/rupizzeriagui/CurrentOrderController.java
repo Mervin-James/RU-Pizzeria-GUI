@@ -77,13 +77,16 @@ public class CurrentOrderController {
     @FXML
     void onPlaceOrderClick(ActionEvent event) {
         orders.addOrder(currentOrder);
+        subtotal.setText("");
+        salesTax.setText("");
+        orderTotal.setText("");
+        customerPhoneNumber.setText("");
+        pizzasInOrder.setItems(null);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Placing Order");
         alert.setContentText("Order added!");
         alert.showAndWait();
-        Stage stage = (Stage) placeOrder.getScene().getWindow();
-        stage.close();
     }
 
     @FXML
