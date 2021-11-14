@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -76,6 +77,11 @@ public class CurrentOrderController {
     @FXML
     void onPlaceOrderClick(ActionEvent event) {
         orders.addOrder(currentOrder);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Information");
+        alert.setHeaderText("Placing Order");
+        alert.setContentText("Order added!");
+        alert.showAndWait();
         Stage stage = (Stage) placeOrder.getScene().getWindow();
         stage.close();
     }

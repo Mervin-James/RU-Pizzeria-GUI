@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
@@ -100,6 +97,11 @@ public class PizzaCustomizationController {
     @FXML
     void onAddToOrderClick(ActionEvent event) {
         currentOrder.addPizza(pizza);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("INFORMATION");
+        alert.setHeaderText("Order");
+        alert.setContentText("Pizza added to the order!");
+        alert.showAndWait();
         Stage stage = (Stage) addToOrder.getScene().getWindow();
         stage.close();
     }
@@ -108,9 +110,16 @@ public class PizzaCustomizationController {
     void onAddButtonClick(ActionEvent event) {
         Topping toppingToAdd =
                 additionalToppings.getSelectionModel().getSelectedItem();
-        if (toppingToAdd != null && pizza.addTopping(toppingToAdd)) {
+        boolean isToppingAdded = pizza.addTopping(toppingToAdd);
+        if (toppingToAdd != null && isToppingAdded) {
             additionalToppings.getItems().remove(toppingToAdd);
             selectedToppings.getItems().add(toppingToAdd);
+        } else if (!isToppingAdded) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR");
+            alert.setHeaderText("Maximum number of toppings");
+            alert.setContentText("At most 7 toppings!");
+            alert.showAndWait();
         }
         DecimalFormat df = new DecimalFormat("###,##0.00");
         pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
@@ -120,11 +129,17 @@ public class PizzaCustomizationController {
     void onRemoveButtonClick(ActionEvent event) {
         Topping toppingToRemove =
                 selectedToppings.getSelectionModel().getSelectedItem();
-        if (toppingToRemove != null &&
-                !defaultToppings.contains(toppingToRemove)) {
+        boolean isDefaultTopping = defaultToppings.contains(toppingToRemove);
+        if (toppingToRemove != null && !isDefaultTopping) {
             selectedToppings.getItems().remove(toppingToRemove);
             additionalToppings.getItems().add(toppingToRemove);
             pizza.removeTopping(toppingToRemove);
+        } else if (isDefaultTopping) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText("Removing toppings");
+            alert.setContentText("You are removing the essential toppings!");
+            alert.showAndWait();
         }
         DecimalFormat df = new DecimalFormat("###,##0.00");
         pizzaPrice.setText(String.valueOf(df.format(pizza.price())));

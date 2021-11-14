@@ -70,7 +70,7 @@ public class PepperoniTest {
         // included by default and cannot be removed or added.
 
         //test case #11: adding 0 toppings to a pepperoni pizza makes the
-        // price stay at $11.97.
+        // price stay at $8.99.
         p = PizzaMaker.createPizza("Pepperoni");
         assertEquals(p.price(), 8.99, 0d);
 
@@ -84,12 +84,6 @@ public class PepperoniTest {
         //test case #13: removing default topping (pepperoni) from a
         // pepperoni pizza is invalid (does not decrease the price below
         // $8.99).
-        //NOTE: This case is handled by our GUI, since pizzas are
-        // initialized with default toppings that cannot be removed.
-        // Therefore, the minimum price of a pepperoni pizza is always $8.99.
-
-        //test case #14: removing default topping (pepperoni) from a
-        // pepperoni pizza is invalid.
         //NOTE: This case is handled by our GUI, since pizzas are
         // initialized with default toppings that cannot be removed.
         // Therefore, the minimum price of a pepperoni pizza is always $8.99.
