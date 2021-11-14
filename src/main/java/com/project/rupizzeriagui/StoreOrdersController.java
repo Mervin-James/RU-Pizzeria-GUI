@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
@@ -38,24 +39,25 @@ public class StoreOrdersController {
 
     public void setMainMenuController(MainMenuController controller) {
         orders = controller.getOrders();
-        if (!orders.getOrders().isEmpty()) {
-            selectedOrder = orders.getOrders().get(0);
-            populateFields();
-        }
+        populateFields();
         updateListView();
     }
 
     private void populateFields() {
-        ArrayList<String> phoneNumbers = new ArrayList<>();
-        for (int i = 0; i < orders.getOrders().size(); i++) {
-            phoneNumbers.add(orders.getOrders().get(i).getPhoneNumber());
+        ArrayList<Order> ordersList = orders.getOrders();
+        if (!ordersList.isEmpty()) {
+            selectedOrder = ordersList.get(0);
+
+            ArrayList<String> phoneNumbers = new ArrayList<>();
+            ordersList.forEach(order -> phoneNumbers.add(order.getPhoneNumber()));
+            customerPhoneNumber.setItems(FXCollections.observableArrayList(
+                    phoneNumbers));
+            customerPhoneNumber.setValue(selectedOrder.getPhoneNumber());
+
+            ObservableList<Pizza> pizzas =
+                    FXCollections.observableArrayList(selectedOrder.getPizzas());
+            pizzasInSelectedOrder.setItems(pizzas);
         }
-        customerPhoneNumber.setItems(FXCollections.observableArrayList(
-                phoneNumbers));
-        customerPhoneNumber.setValue(selectedOrder.getPhoneNumber());
-        ObservableList<Pizza> pizzas =
-                FXCollections.observableArrayList(selectedOrder.getPizzas());
-        pizzasInSelectedOrder.setItems(pizzas);
     }
 
     private void updateListView() {
@@ -63,61 +65,67 @@ public class StoreOrdersController {
         boolean isOrdersEmpty = orders.getOrders().isEmpty();
         cancelStoreOrder.setDisable(isOrdersEmpty);
         exportStoreOrder.setDisable(isOrdersEmpty);
-        if (!isOrdersEmpty && selectedOrder != null) {
-            orderTotal.setText(df.format(selectedOrder.orderTotal()));
+        if (selectedOrder != null &&
+                orders.getOrders().contains(selectedOrder)) {
+            customerPhoneNumber.setValue(selectedOrder.getPhoneNumber());
+            orderTotal.setText(df.format(selectedOrder.subtotal()));
             pizzasInSelectedOrder.setItems(FXCollections.observableArrayList(
                     selectedOrder.getPizzas()));
+        } else if ((selectedOrder != null &&
+                !orders.getOrders().contains(selectedOrder)) ||
+                (selectedOrder == null && !isOrdersEmpty)) {
+            selectedOrder = orders.getOrders().get(0);
             customerPhoneNumber.setValue(selectedOrder.getPhoneNumber());
+            orderTotal.setText(df.format(selectedOrder.subtotal()));
+            pizzasInSelectedOrder.setItems(FXCollections.observableArrayList(
+                    selectedOrder.getPizzas()));
         } else {
+            customerPhoneNumber.setValue(null);
             orderTotal.setText("");
             pizzasInSelectedOrder.setItems(FXCollections.observableArrayList(
-                    new ArrayList<>()));
-            customerPhoneNumber.setValue(null);
+                    new ArrayList<Pizza>()));
         }
     }
 
     @FXML
     void onCancelOrderClick(ActionEvent event) {
-        customerPhoneNumber.getItems().remove(selectedOrder.getPhoneNumber());
         orders.removeOrder(selectedOrder);
-        if (orders.getOrders().isEmpty()) {
-            selectedOrder = null;
-            customerPhoneNumber.setValue("");
-        } else {
-            selectedOrder = orders.getOrders().get(0);
+        customerPhoneNumber.getItems().remove(selectedOrder.getPhoneNumber());
+    }
+
+    @FXML
+    void selectedCustomerPhoneNumber(ActionEvent event) {
+        selectedOrder = null;
+        String selectedPhoneNumber = customerPhoneNumber.getValue();
+        if (selectedPhoneNumber != null) {
+            Order foundOrder = null;
+            for (Order order : orders.getOrders()) {
+                if (selectedPhoneNumber.equals(order.getPhoneNumber())) {
+                    foundOrder = order;
+                    break;
+                }
+            }
+            selectedOrder = foundOrder;
         }
         updateListView();
     }
 
     @FXML
-    void onExportStoreOrderClick(ActionEvent event)
-            throws FileNotFoundException {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Open Target File for the Export");
-        chooser.getExtensionFilters()
-                .addAll(new ExtensionFilter("Text Files", "*.txt"),
-                        new ExtensionFilter("All Files", "*.*"));
+    void onExportStoreOrderClick(ActionEvent event) {
+        DirectoryChooser chooser = new DirectoryChooser();
+        chooser.setTitle("Open Target Directory for the Export");
+//        chooser.getExtensionFilters()
+//                .addAll(new ExtensionFilter("Text Files", "*.txt"),
+//                        new ExtensionFilter("All Files", "*.*"));
         Stage stage = new Stage();
-        File targetFile = chooser.showSaveDialog(stage);
-        orders.export(targetFile);
+//        File defaultDirectory = new File("Store_Orders.txt");
+//        chooser.setInitialDirectory(defaultDirectory);
+        File selectedDirectory = chooser.showDialog(stage);
+//        File targetFile = chooser.showSaveDialog(stage);
+        try {
+            orders.export(selectedDirectory);
+        } catch (FileNotFoundException e) {}
     }
 
-    @FXML
-    void selectedCustomerPhoneNumber(ActionEvent event) {
-        if(customerPhoneNumber.getValue() == null) {
-            if(orders.getOrders().isEmpty()) {
-                return;
-            }
-            customerPhoneNumber.setValue(orders.getOrders().get(0).getPhoneNumber());
-            return;
-        }
-        for (int i = 0; i < orders.getOrders().size(); i++) {
-            if (customerPhoneNumber.getValue()
-                    .equals(orders.getOrders().get(i).getPhoneNumber())) {
-                selectedOrder = orders.getOrders().get(i);
-                updateListView();
-                return;
-            }
-        }
-    }
+
 }
