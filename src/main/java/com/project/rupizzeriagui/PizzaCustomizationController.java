@@ -10,7 +10,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class PizzaCustomizationController {
@@ -50,7 +52,8 @@ public class PizzaCustomizationController {
         pizza = controller.getSelectedPizza();
         pizzaImg = controller.getSelectedPizzaImg();
         currentOrder = controller.getSelectedOrder();
-        defaultToppings = pizza.getToppings();
+        defaultToppings = new ArrayList<>();
+        defaultToppings.addAll(pizza.getToppings());
         populateFields();
     }
 
@@ -69,17 +72,31 @@ public class PizzaCustomizationController {
                         Topping.Cheese, Topping.GreenPepper, Topping.Onion,
                         Topping.Pepperoni, Topping.Mushroom);
         additionalToppings.setItems(toppings);
-//        ArrayList<Topping> defaultToppings = pizza.getToppings();
         toppings.removeAll(defaultToppings);
-//        selectedToppings.setItems(FXCollections.observableList(defaultToppings));
         for (Topping defaultTopping : defaultToppings) {
             selectedToppings.getItems().add(defaultTopping);
         }
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
+    }
+
+    @FXML
+    void onPizzaSizeChange(ActionEvent event) {
+        String size = pizzaSize.getSelectionModel().getSelectedItem();
+        switch (size) {
+            case "small" -> pizza.setSize(Size.small);
+            case "medium" -> pizza.setSize(Size.medium);
+            case "large" -> pizza.setSize(Size.large);
+        }
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
     @FXML
     void onAddToOrderClick(ActionEvent event) {
         currentOrder.addPizza(pizza);
+        Stage stage = (Stage) addToOrder.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -90,18 +107,21 @@ public class PizzaCustomizationController {
             additionalToppings.getItems().remove(toppingToAdd);
             selectedToppings.getItems().add(toppingToAdd);
         }
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
     @FXML
     void onRemoveButtonClick(ActionEvent event) {
         Topping toppingToRemove =
                 selectedToppings.getSelectionModel().getSelectedItem();
-        System.out.println(defaultToppings.toString());
         if (toppingToRemove != null && !defaultToppings.contains(toppingToRemove)) {
             selectedToppings.getItems().remove(toppingToRemove);
             additionalToppings.getItems().add(toppingToRemove);
             pizza.removeTopping(toppingToRemove);
         }
+        DecimalFormat df = new DecimalFormat("###,##0.00");
+        pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
 }

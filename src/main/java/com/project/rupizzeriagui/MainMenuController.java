@@ -37,6 +37,7 @@ public class MainMenuController {
     private Pizza selectedPizza;
     private Image selectedPizzaImg;
     private Order selectedOrder;
+    private static final int PHONE_NUMBER_DIGITS = 10;
 
     @FXML
     public void initialize() {
@@ -45,7 +46,8 @@ public class MainMenuController {
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != 10) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
+                .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -72,7 +74,8 @@ public class MainMenuController {
 
     @FXML
     void onOrderHawaiianButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != 10) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
+                .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -98,7 +101,8 @@ public class MainMenuController {
 
     @FXML
     void onOrderPepperoniButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != 10) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
+                .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -124,7 +128,8 @@ public class MainMenuController {
 
     @FXML
     void onCurrentOrderButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != 10) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
+                .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }

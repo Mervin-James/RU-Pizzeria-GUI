@@ -16,7 +16,7 @@
             <ImageView fx:id="pizzaView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
          </graphic>
       </Button>
-      <ComboBox fx:id="pizzaSize" layoutX="287.0" layoutY="132.0" prefWidth="150.0" />
+      <ComboBox fx:id="pizzaSize" layoutX="287.0" layoutY="132.0" onAction="#onPizzaSizeChange" prefWidth="150.0" />
       <Text layoutX="330.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pizza Size">
          <font>
             <Font size="15.0" />
