@@ -9,7 +9,6 @@ public enum Topping {
     GreenPepper,
     Onion,
     Mushroom,
-    Cheese,
     Pineapple,
     BlackOlives,
 }

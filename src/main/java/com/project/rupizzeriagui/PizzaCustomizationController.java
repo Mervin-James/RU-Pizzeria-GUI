@@ -67,10 +67,15 @@ public class PizzaCustomizationController {
         pizzaSize.setValue("small");
         ObservableList<Topping> toppings =
                 FXCollections.observableArrayList(Topping.Sausage,
-                        Topping.Chicken, Topping.Beef, Topping.Ham,
-                        Topping.Pineapple, Topping.BlackOlives,
-                        Topping.Cheese, Topping.GreenPepper, Topping.Onion,
-                        Topping.Pepperoni, Topping.Mushroom);
+                        Topping.Chicken,
+                        Topping.Beef,
+                        Topping.Ham,
+                        Topping.Pineapple,
+                        Topping.BlackOlives,
+                        Topping.GreenPepper,
+                        Topping.Onion,
+                        Topping.Pepperoni,
+                        Topping.Mushroom);
         additionalToppings.setItems(toppings);
         toppings.removeAll(defaultToppings);
         for (Topping defaultTopping : defaultToppings) {
@@ -115,7 +120,8 @@ public class PizzaCustomizationController {
     void onRemoveButtonClick(ActionEvent event) {
         Topping toppingToRemove =
                 selectedToppings.getSelectionModel().getSelectedItem();
-        if (toppingToRemove != null && !defaultToppings.contains(toppingToRemove)) {
+        if (toppingToRemove != null &&
+                !defaultToppings.contains(toppingToRemove)) {
             selectedToppings.getItems().remove(toppingToRemove);
             additionalToppings.getItems().add(toppingToRemove);
             pizza.removeTopping(toppingToRemove);

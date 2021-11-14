@@ -104,7 +104,13 @@ public class StoreOrdersController {
 
     @FXML
     void selectedCustomerPhoneNumber(ActionEvent event) {
-        if(customerPhoneNumber.getValue() == null) return;
+        if(customerPhoneNumber.getValue() == null) {
+            if(orders.getOrders().isEmpty()) {
+                return;
+            }
+            customerPhoneNumber.setValue(orders.getOrders().get(0).getPhoneNumber());
+            return;
+        }
         for (int i = 0; i < orders.getOrders().size(); i++) {
             if (customerPhoneNumber.getValue()
                     .equals(orders.getOrders().get(i).getPhoneNumber())) {
