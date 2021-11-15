@@ -3,6 +3,7 @@ package com.project.rupizzeriagui;
 public class Pepperoni extends Pizza {
     private static final int MIN_TOPPINGS = 1;
     private static final double BASE_PRICE_DELUXE = 8.99;
+    private static final double BASE_SIZE_COST = 0.0;
 
     public Pepperoni() {
         toppings.add(Topping.Pepperoni);
@@ -11,7 +12,7 @@ public class Pepperoni extends Pizza {
 
     @Override
     public double price() {
-        double sizeCost = 0.0;
+        double sizeCost = BASE_SIZE_COST;
         if (size == Size.medium) {
             sizeCost = ADDITIONAL_PRICE_MEDIUM_SIZE;
         } else if (size == Size.large) {
