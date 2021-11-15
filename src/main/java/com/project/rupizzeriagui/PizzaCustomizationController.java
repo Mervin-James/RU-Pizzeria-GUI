@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -109,19 +110,21 @@ public class PizzaCustomizationController {
     void onAddButtonClick(ActionEvent event) {
         Topping toppingToAdd =
                 additionalToppings.getSelectionModel().getSelectedItem();
-        boolean isToppingAdded = pizza.addTopping(toppingToAdd);
-        if (toppingToAdd != null && isToppingAdded) {
-            additionalToppings.getItems().remove(toppingToAdd);
-            selectedToppings.getItems().add(toppingToAdd);
-        } else if (!isToppingAdded) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR");
-            alert.setHeaderText("Maximum number of toppings");
-            alert.setContentText("At most 7 toppings!");
-            alert.showAndWait();
+        if (toppingToAdd != null) {
+            boolean isToppingAdded = pizza.addTopping(toppingToAdd);
+            if (toppingToAdd != null && isToppingAdded) {
+                additionalToppings.getItems().remove(toppingToAdd);
+                selectedToppings.getItems().add(toppingToAdd);
+            } else if (!isToppingAdded) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR");
+                alert.setHeaderText("Maximum number of toppings");
+                alert.setContentText("At most 7 toppings!");
+                alert.showAndWait();
+            }
+            DecimalFormat df = new DecimalFormat("###,##0.00");
+            pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
         }
-        DecimalFormat df = new DecimalFormat("###,##0.00");
-        pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
     @FXML
