@@ -8,7 +8,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -57,7 +56,6 @@ public class PizzaCustomizationController {
     private void populateFields() {
         pizzaView.setImage(pizzaImg);
         imageButton.setText("Deluxe");
-//        System.out.println("From PizzaViewController" + pizza.toString());
         ObservableList<String> sizes = FXCollections.observableArrayList(
                 "small", "medium", "large");
         pizzaSize.setItems(sizes);

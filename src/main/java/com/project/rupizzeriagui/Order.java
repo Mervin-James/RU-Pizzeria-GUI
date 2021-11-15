@@ -11,12 +11,12 @@ public class Order {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean addPizza(Pizza pizza) {
-        return pizzas.add(pizza);
+    public void addPizza(Pizza pizza) {
+        pizzas.add(pizza);
     }
 
-    public boolean removePizza(Pizza pizza) {
-        return pizzas.remove(pizza);
+    public void removePizza(Pizza pizza) {
+        pizzas.remove(pizza);
     }
 
     public ArrayList<Pizza> getPizzas() {

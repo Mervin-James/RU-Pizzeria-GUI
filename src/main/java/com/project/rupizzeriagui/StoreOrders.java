@@ -17,12 +17,12 @@ public class StoreOrders {
         return this.orders;
     }
 
-    public boolean addOrder(Order order) {
-        return orders.add(order);
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 
-    public boolean removeOrder(Order order) {
-        return orders.remove(order);
+    public void removeOrder(Order order) {
+        orders.remove(order);
     }
 
     public void export(File targetFile) throws FileNotFoundException {

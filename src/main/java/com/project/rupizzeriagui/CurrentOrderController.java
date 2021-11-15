@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
 import java.text.DecimalFormat;
 
 public class CurrentOrderController {
@@ -87,6 +88,8 @@ public class CurrentOrderController {
         alert.setHeaderText("Placing Order");
         alert.setContentText("Order added!");
         alert.showAndWait();
+        Stage stage = (Stage) placeOrder.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
