@@ -17,6 +17,8 @@ import java.text.DecimalFormat;
 public class CurrentOrderController {
     private Order currentOrder;
     private StoreOrders orders;
+    private MainMenuController mainMenuController;
+
     @FXML
     private ListView<Pizza> pizzasInOrder;
 
@@ -39,8 +41,9 @@ public class CurrentOrderController {
     private TextField subtotal;
 
     public void setMainMenuController(MainMenuController controller) {
-        currentOrder = controller.getSelectedOrder();
-        orders = controller.getOrders();
+        this.mainMenuController = controller;
+        currentOrder = mainMenuController.getSelectedOrder();
+        orders = mainMenuController.getOrders();
         pizzasInOrder.getSelectionModel()
                 .selectedItemProperty()
                 .addListener(new ChangeListener<Pizza>() {
@@ -83,6 +86,7 @@ public class CurrentOrderController {
         orderTotal.setText("");
         customerPhoneNumber.setText("");
         pizzasInOrder.setItems(null);
+        mainMenuController.setPhoneNumber("");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Information");
         alert.setHeaderText("Placing Order");

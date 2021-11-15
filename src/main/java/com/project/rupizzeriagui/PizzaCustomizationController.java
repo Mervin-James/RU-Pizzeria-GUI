@@ -55,7 +55,8 @@ public class PizzaCustomizationController {
 
     private void populateFields() {
         pizzaView.setImage(pizzaImg);
-        imageButton.setText("Deluxe");
+        imageButton.setText(pizza.toString().substring(0,
+                pizza.toString().indexOf(' ')));
         ObservableList<String> sizes = FXCollections.observableArrayList(
                 "small", "medium", "large");
         pizzaSize.setItems(sizes);

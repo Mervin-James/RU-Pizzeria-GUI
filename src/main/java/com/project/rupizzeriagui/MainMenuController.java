@@ -9,33 +9,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class MainMenuController {
 
+    private static final int PHONE_NUMBER_DIGITS = 10;
     @FXML
     private Button currentOrder;
-
     @FXML
     private Button orderDeluxe;
-
     @FXML
     private Button orderHawaiian;
-
     @FXML
     private Button orderPepperoni;
-
     @FXML
     private TextField phoneNumber;
-
     @FXML
     private Button storeOrders;
-
     private StoreOrders orders;
     private Pizza selectedPizza;
     private Image selectedPizzaImg;
     private Order selectedOrder;
-    private static final int PHONE_NUMBER_DIGITS = 10;
 
     @FXML
     public void initialize() {
@@ -44,8 +39,9 @@ public class MainMenuController {
 
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
-                .matches("[0-9]+"))) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
+                !(phoneNumber.getText()
+                        .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -75,8 +71,9 @@ public class MainMenuController {
 
     @FXML
     void onOrderHawaiianButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
-                .matches("[0-9]+"))) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
+                !(phoneNumber.getText()
+                        .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -106,8 +103,9 @@ public class MainMenuController {
 
     @FXML
     void onOrderPepperoniButtonClick(ActionEvent event) throws IOException {
-        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS || !(phoneNumber.getText()
-                .matches("[0-9]+"))) {
+        if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
+                !(phoneNumber.getText()
+                        .matches("[0-9]+"))) {
             invalidPhoneNumberAlert();
             return;
         }
@@ -184,6 +182,10 @@ public class MainMenuController {
 
     public StoreOrders getOrders() {
         return this.orders;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber.setText(phoneNumber);
     }
 
     private void invalidPhoneNumberAlert() {
