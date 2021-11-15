@@ -8,11 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
@@ -47,13 +45,11 @@ public class StoreOrdersController {
         ArrayList<Order> ordersList = orders.getOrders();
         if (!ordersList.isEmpty()) {
             selectedOrder = ordersList.get(0);
-
             ArrayList<String> phoneNumbers = new ArrayList<>();
             ordersList.forEach(order -> phoneNumbers.add(order.getPhoneNumber()));
             customerPhoneNumber.setItems(FXCollections.observableArrayList(
                     phoneNumbers));
             customerPhoneNumber.setValue(selectedOrder.getPhoneNumber());
-
             ObservableList<Pizza> pizzas =
                     FXCollections.observableArrayList(selectedOrder.getPizzas());
             pizzasInSelectedOrder.setItems(pizzas);

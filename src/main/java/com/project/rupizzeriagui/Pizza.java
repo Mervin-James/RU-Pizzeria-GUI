@@ -20,8 +20,8 @@ public abstract class Pizza {
         return false;
     }
 
-    public boolean removeTopping(Topping topping) {
-        return toppings.remove(topping);
+    public void removeTopping(Topping topping) {
+        toppings.remove(topping);
     }
 
     public void setSize(Size size) {

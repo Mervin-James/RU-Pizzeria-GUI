@@ -132,7 +132,7 @@ public class PepperoniTest {
         p.addTopping(Topping.Onion);
         assertEquals(p.price(), 12.48, 0d);
 
-        //test case #19: adding an additional topping to a large pepperoni
+        //test case #20: adding an additional topping to a large pepperoni
         // pizza increases the price by $1.49 for a topping and $4 for
         // the size increase for a total of $14.47
         p = PizzaMaker.createPizza("Pepperoni");
