@@ -22,9 +22,6 @@ public class PizzaCustomizationController {
     private Button addToOrder;
 
     @FXML
-    private Button addTopping;
-
-    @FXML
     private Button imageButton;
 
     @FXML
@@ -35,9 +32,6 @@ public class PizzaCustomizationController {
 
     @FXML
     private ImageView pizzaView;
-
-    @FXML
-    private Button removeTopping;
 
     @FXML
     private ListView<Topping> selectedToppings;

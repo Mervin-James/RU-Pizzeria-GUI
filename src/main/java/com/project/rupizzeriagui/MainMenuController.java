@@ -16,17 +16,8 @@ public class MainMenuController {
 
     private static final int PHONE_NUMBER_DIGITS = 10;
     @FXML
-    private Button currentOrder;
-    @FXML
-    private Button orderDeluxe;
-    @FXML
-    private Button orderHawaiian;
-    @FXML
-    private Button orderPepperoni;
-    @FXML
     private TextField phoneNumber;
     @FXML
-    private Button storeOrders;
     private StoreOrders orders;
     private Pizza selectedPizza;
     private Image selectedPizzaImg;
