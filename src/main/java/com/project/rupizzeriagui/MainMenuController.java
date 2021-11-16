@@ -5,13 +5,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Controller class that specifies the attributes and actions for the
+ * Main Menu GUI.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class MainMenuController {
 
     private static final int PHONE_NUMBER_DIGITS = 10;
@@ -23,11 +28,21 @@ public class MainMenuController {
     private Image selectedPizzaImg;
     private Order selectedOrder;
 
+    /**
+     * Initializes order by creating a new StoreOrders object.
+     */
     @FXML
     public void initialize() {
         this.orders = new StoreOrders();
     }
 
+    /**
+     * Opens the Pizza Customization GUI for a Deluxe pizza and creates a new
+     * order if the phone number provided is not associated with an existing
+     * order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onOrderDeluxeButtonClick(ActionEvent event) throws IOException {
         if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
@@ -60,6 +75,13 @@ public class MainMenuController {
         stage.show();
     }
 
+    /**
+     * Opens the Pizza Customization GUI for a Hawaiian pizza and creates a
+     * new order if the phone number provided is not associated with an
+     * existing order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onOrderHawaiianButtonClick(ActionEvent event) throws IOException {
         if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
@@ -92,6 +114,13 @@ public class MainMenuController {
         stage.show();
     }
 
+    /**
+     * Opens the Pizza Customization GUI for a Pepperoni pizza and creates a
+     * new order if the phone number provided is not associated with an
+     * existing order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onOrderPepperoniButtonClick(ActionEvent event) throws IOException {
         if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
@@ -124,6 +153,13 @@ public class MainMenuController {
         stage.show();
     }
 
+    /**
+     * Opens the Current Order GUI and creates a new order if the phone number
+     * provided is not associated with an existing order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     * @throws IOException exception caused by an input/output error.
+     */
     @FXML
     void onCurrentOrderButtonClick(ActionEvent event) throws IOException {
         if (phoneNumber.getText().length() != PHONE_NUMBER_DIGITS ||
@@ -146,6 +182,12 @@ public class MainMenuController {
         stage.show();
     }
 
+    /**
+     * Opens the Store Order GUI.
+     *
+     * @param event an event that occurs when a button is clicked.
+     * @throws IOException exception caused by an input/output error.
+     */
     @FXML
     void onStoreOrdersButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
@@ -159,26 +201,54 @@ public class MainMenuController {
         stage.show();
     }
 
+    /**
+     * Getter method for the selected pizza.
+     *
+     * @return selected pizza.
+     */
     public Pizza getSelectedPizza() {
         return this.selectedPizza;
     }
 
+    /**
+     * Getter method for the selected pizza image.
+     *
+     * @return selected pizza image.
+     */
     public Image getSelectedPizzaImg() {
         return this.selectedPizzaImg;
     }
 
+    /**
+     * Getter method for the selected order.
+     *
+     * @return selected order.
+     */
     public Order getSelectedOrder() {
         return this.selectedOrder;
     }
 
+    /**
+     * Getter method for store orders.
+     *
+     * @return store orders.
+     */
     public StoreOrders getOrders() {
         return this.orders;
     }
 
+    /**
+     * Setter method for the phone number associated with an order.
+     *
+     * @param phoneNumber the phone number associated with this order.
+     */
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber.setText(phoneNumber);
     }
 
+    /**
+     * Creates an alert to informs the user to input a 10-digit phone number.
+     */
     private void invalidPhoneNumberAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Invalid input data");
@@ -188,6 +258,9 @@ public class MainMenuController {
         alert.showAndWait();
     }
 
+    /**
+     * Creates an alert to informs the user that a new pizza is being created.
+     */
     private void confirmCreateNewPizza() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Confirmation");

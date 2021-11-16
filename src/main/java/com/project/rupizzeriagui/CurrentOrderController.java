@@ -14,6 +14,12 @@ import javafx.stage.Stage;
 
 import java.text.DecimalFormat;
 
+/**
+ * Controller class that specifies the attributes and actions for the
+ * Current Order GUI.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class CurrentOrderController {
     private Order currentOrder;
     private StoreOrders orders;
@@ -40,6 +46,12 @@ public class CurrentOrderController {
     @FXML
     private TextField subtotal;
 
+    /**
+     * Sets the controller to the MainMenuController so that
+     * CurrentOrderController can share data with MainMenuController.
+     *
+     * @param controller instance of MainMenuController
+     */
     public void setMainMenuController(MainMenuController controller) {
         this.mainMenuController = controller;
         currentOrder = mainMenuController.getSelectedOrder();
@@ -58,6 +70,9 @@ public class CurrentOrderController {
         updateListView();
     }
 
+    /**
+     * Populates the fields of the Current Order GUI.
+     */
     private void populateFields() {
         customerPhoneNumber.setText(currentOrder.getPhoneNumber());
         ObservableList<Pizza> pizzas =
@@ -65,6 +80,9 @@ public class CurrentOrderController {
         pizzasInOrder.setItems(pizzas);
     }
 
+    /**
+     * Updates the list view for pizza orders.
+     */
     private void updateListView() {
         DecimalFormat df = new DecimalFormat("###,##0.00");
         removePizza.setDisable(
@@ -78,6 +96,12 @@ public class CurrentOrderController {
         orderTotal.setText(df.format(currentOrder.orderTotal()));
     }
 
+    /**
+     * Adds current order to store orders and creates an alert to inform
+     * user that an order has been placed.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onPlaceOrderClick(ActionEvent event) {
         orders.addOrder(currentOrder);
@@ -96,6 +120,11 @@ public class CurrentOrderController {
         stage.close();
     }
 
+    /**
+     * Removes pizza from current order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onRemovePizzaClick(ActionEvent event) {
         Pizza pizzaToRemove = pizzasInOrder.getSelectionModel()

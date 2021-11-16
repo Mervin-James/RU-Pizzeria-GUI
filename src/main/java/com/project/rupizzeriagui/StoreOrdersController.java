@@ -16,6 +16,12 @@ import java.io.FileNotFoundException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Controller class that specifies the attributes and actions for the
+ * Store Orders GUI.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class StoreOrdersController {
     private StoreOrders orders;
     private Order selectedOrder;
@@ -35,12 +41,21 @@ public class StoreOrdersController {
     @FXML
     private TextField orderTotal;
 
+    /**
+     * Sets the controller to the MainMenuController so that
+     * StoreOrdersController can share data with MainMenuController.
+     *
+     * @param controller instance of MainMenuController
+     */
     public void setMainMenuController(MainMenuController controller) {
         orders = controller.getOrders();
         populateFields();
         updateListView();
     }
 
+    /**
+     * Populates the fields of the Store Orders GUI.
+     */
     private void populateFields() {
         ArrayList<Order> ordersList = orders.getOrders();
         if (!ordersList.isEmpty()) {
@@ -56,6 +71,9 @@ public class StoreOrdersController {
         }
     }
 
+    /**
+     * Updates the list view for store orders.
+     */
     private void updateListView() {
         DecimalFormat df = new DecimalFormat("###,##0.00");
         boolean isOrdersEmpty = orders.getOrders().isEmpty();
@@ -83,12 +101,23 @@ public class StoreOrdersController {
         }
     }
 
+    /**
+     * Cancels an order (removes order from list of orders).
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onCancelOrderClick(ActionEvent event) {
         orders.removeOrder(selectedOrder);
         customerPhoneNumber.getItems().remove(selectedOrder.getPhoneNumber());
     }
 
+    /**
+     * Searches orders to find the order associated with the given phone
+     * number.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void selectedCustomerPhoneNumber(ActionEvent event) {
         selectedOrder = null;
@@ -106,6 +135,14 @@ public class StoreOrdersController {
         updateListView();
     }
 
+    /**
+     * Creates a File Chooser object so the user can choose where to export
+     * the file to.
+     *
+     * @param event an event that occurs when a button is clicked.
+     * @throws FileNotFoundException exception caused when a file is not
+     * found.
+     */
     @FXML
     void onExportStoreOrderClick(ActionEvent event)
             throws FileNotFoundException {

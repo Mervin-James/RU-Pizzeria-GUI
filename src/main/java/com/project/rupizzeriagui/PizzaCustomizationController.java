@@ -12,6 +12,12 @@ import javafx.stage.Stage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Controller class that specifies the attributes and actions for the
+ * Pizza Customization GUI.
+ *
+ * @author Mervin James, Akshar Patel
+ */
 public class PizzaCustomizationController {
     private Pizza pizza;
     private Image pizzaImg;
@@ -39,6 +45,12 @@ public class PizzaCustomizationController {
     @FXML
     private ListView<Topping> additionalToppings;
 
+    /**
+     * Sets the controller to the MainMenuController so that
+     * PizzaCustomizationController can share data with MainMenuController.
+     *
+     * @param controller instance of MainMenuController
+     */
     public void setMainMenuController(MainMenuController controller) {
         pizza = controller.getSelectedPizza();
         pizzaImg = controller.getSelectedPizzaImg();
@@ -48,6 +60,9 @@ public class PizzaCustomizationController {
         populateFields();
     }
 
+    /**
+     * Populates the fields of the Pizza Customization GUI.
+     */
     private void populateFields() {
         pizzaView.setImage(pizzaImg);
         imageButton.setText(pizza.toString().substring(0,
@@ -76,6 +91,11 @@ public class PizzaCustomizationController {
         pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
+    /**
+     * Changes the size of a pizza based on the combobox selection.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onPizzaSizeChange(ActionEvent event) {
         String size = pizzaSize.getSelectionModel().getSelectedItem();
@@ -88,6 +108,12 @@ public class PizzaCustomizationController {
         pizzaPrice.setText(String.valueOf(df.format(pizza.price())));
     }
 
+    /**
+     * Adds pizza to the order and creates an alert informing the user that
+     * a pizza has been added to the order.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onAddToOrderClick(ActionEvent event) {
         currentOrder.addPizza(pizza);
@@ -100,16 +126,22 @@ public class PizzaCustomizationController {
         stage.close();
     }
 
+    /**
+     * Adds a topping to the pizza if the pizza has less than 7 toppings
+     * and creates an alert if the user tries to add more than 7 toppings.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onAddButtonClick(ActionEvent event) {
         Topping toppingToAdd =
                 additionalToppings.getSelectionModel().getSelectedItem();
         if (toppingToAdd != null) {
             boolean isToppingAdded = pizza.addTopping(toppingToAdd);
-            if (toppingToAdd != null && isToppingAdded) {
+            if (isToppingAdded) {
                 additionalToppings.getItems().remove(toppingToAdd);
                 selectedToppings.getItems().add(toppingToAdd);
-            } else if (!isToppingAdded) {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR");
                 alert.setHeaderText("Maximum number of toppings");
@@ -121,6 +153,12 @@ public class PizzaCustomizationController {
         }
     }
 
+    /**
+     * Removes a topping from the pizza if it is not a default topping.
+     * Creates an alert if the user tries to remove a default topping.
+     *
+     * @param event an event that occurs when a button is clicked.
+     */
     @FXML
     void onRemoveButtonClick(ActionEvent event) {
         Topping toppingToRemove =
