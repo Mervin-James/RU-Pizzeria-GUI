@@ -24,7 +24,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader =
                 new FXMLLoader(Main.class.getResource(
-                        "main-menu.fxml"));
+                        "main-menu-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 800);
         stage.setTitle("RU Pizzeria");
         stage.setScene(scene);

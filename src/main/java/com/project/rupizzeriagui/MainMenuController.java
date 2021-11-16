@@ -62,7 +62,7 @@ public class MainMenuController {
                 "Deluxe_Pizza.jpg"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "pizza-customization.fxml"));
+                "pizza-customization-view.fxml"));
 
         Stage stage = new Stage();
         stage.setTitle("Customize your Pizza");
@@ -101,7 +101,7 @@ public class MainMenuController {
                 "Hawaiian_Pizza.jpg"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "pizza-customization.fxml"));
+                "pizza-customization-view.fxml"));
 
         Stage stage = new Stage();
         stage.setTitle("Customize your Pizza");
@@ -140,7 +140,7 @@ public class MainMenuController {
                 "Pepperoni_Pizza.jpg"));
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "pizza-customization.fxml"));
+                "pizza-customization-view.fxml"));
 
         Stage stage = new Stage();
         stage.setTitle("Customize your Pizza");
@@ -172,7 +172,7 @@ public class MainMenuController {
             selectedOrder = new Order(phoneNumber.getText());
         }
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "current-order.fxml"));
+                "current-order-view.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Pizza Order Overview");
         stage.setScene(new Scene(loader.load()));
@@ -191,7 +191,7 @@ public class MainMenuController {
     @FXML
     void onStoreOrdersButtonClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "store-orders.fxml"));
+                "store-orders-view.fxml"));
         Stage stage = new Stage();
         stage.setTitle("Store Order Overview");
         stage.setScene(new Scene(loader.load()));
